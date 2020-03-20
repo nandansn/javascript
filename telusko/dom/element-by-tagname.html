@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            DOM - Element by tag name
+        </title>
+    </head>
+    <body>
+        <div class="para1">
+            <p>
+                Para 1
+            </p>
+            <p>
+                Para 2
+
+            </p>
+            <p>
+                Para 3
+            </p>
+        </div>
+        <div class="para2">
+
+        </div>
+        <div>
+            <input type="button" value="Change color" onclick="changeColor()">
+        </div>
+    </body>
+    <script>
+        function changeColor() {
+            var paraElement = document.getElementsByTagName('p')
+            var divPara = document.getElementsByClassName('para1')
+
+            for (i=0; i<divPara.length; i++){
+                divPara[i].style.color = "red"
+            }
+        }
+    </script>
+</html>

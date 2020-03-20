@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Login Page
+    </title>
+    <style>
+        body {
+            background-image: url('images/body-bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="login" action="result.html">
+        <input type="text" name="userName" maxlength="15" id="userName"><br><br>
+        <input type="text" name="userPwd" maxlength="15"><br><br>
+        <button type="submit" value="Sign In">Sign In</button>
+    </form>
+
+    <script>
+        window.onload = function () {
+            var formElement = document.getElementById("login")
+            formElement.onsubmit = function () {
+                localStorage.setItem("userName", document.getElementById("userName").value)
+
+            }
+        }
+    </script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,55 @@
+What is the window object anyway?
+    When you’re writing code for the browser, the window
+    object is always going to be part of your life. The window
+    object represents both the global environment for your
+    JavaScript programs and the main window of your
+    app, and as such, it contains many core properties and
+    methods.
+
+
+    example window properties
+        window
+            location
+            status
+            onload
+            document
+    example window functions
+        alert
+        prompt
+        open
+        close
+        setTimeout
+        setInterval
+        
+
+    Window is the global object. It may seem a little weird, but the window object acts as your global environment, so the names of any properties or methods from window are resolved even
+    if you don’t prepend them with window. In addition, any global variables you define are also put into the window namespace, so you can reference them as window.myvariable.
+
+document object:
+    The document object is another familar face; it’s the object we’ve been using
+    to access the DOM. And, as you’ve just seen, it is actually a property of the
+    window object. Of course we haven’t used it like window.document because we
+    don’t need to.
+
+
+    example document object:
+
+        document property:
+            domain
+            title
+            URL
+        document functions:
+            getElementById
+            getElementsByTagName
+            getElementsByClassName
+            createElement
+
+
+element object:
+    One more object to think about: your element objects
+    We shouldn’t forget when we’re working with methods like getElementById that the
+    elements they return are also objects! Okay, you might not have realized this, but now that
+    you know, you might be starting to think everything in JavaScript is an object, and, well,
+    you’re pretty much right.
+    You’ve already seen some evidence of element properties, like the innerHTML property;
+    let’s look at some of the more notable properties and methods:

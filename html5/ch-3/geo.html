@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        My Location
+    </title>
+</head>
+
+<body>
+    <div id="location"></div>
+
+    <div>
+        <a id="locate">
+            Locate in maps
+        </a>
+    </div>
+    <script>
+        window.onload = function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var mypos = "Your position at <br>".concat(position.coords.latitude).concat("<br>")
+                        .concat(position
+                            .coords.longitude)
+                    document.getElementById("location").innerHTML = mypos
+
+                    mypos = "".concat("11.328076").concat(",").concat("77.737439")
+
+                    var link = "https://www.google.com/maps?q=".concat(mypos)
+
+
+                    document.getElementById("locate").setAttribute("href",
+                        link)
+                })
+            } else {
+                document.getElementById("location").innerText = "Api not Supported"
+            }
+        }
+    </script>
+</body>
+
+
+
+</html>

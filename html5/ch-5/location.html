@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Your location
+    </title>
+
+</head>
+
+<body>
+    <div id="location"></div>
+    <script>
+        window.onload = function yourLocation() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var y = position.coords.longitude;
+                var x = position.coords.latitude;
+
+                var mypos = "".concat(x).concat(",").concat(y)
+
+                document.getElementById("location").innerHTML = "Your at the longitute:" + x +
+                    " and latitude:" + y
+                var brElement = document.createElement("br");
+                document.getElementById("location").appendChild(
+                    brElement)
+
+
+                var linkElement = document.createElement("a");
+
+
+
+                var locationLink = "https://www.google.com/maps?q=".concat(mypos)
+
+                linkElement.setAttribute("href", locationLink)
+                linkElement.setAttribute("target", "_blank")
+
+                linkElement.innerText = "Map"
+
+                document.getElementById("location").appendChild(linkElement)
+            })
+        }
+    </script>
+</body>
+
+</html>

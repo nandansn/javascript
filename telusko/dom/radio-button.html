@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DOM Radio Button</title>
+    </head>
+    <body>
+        <input type="radio" id="apple" name="mobile" value="Apple">Apple<br>
+        <input type="radio" id="samsung" name="mobile" value="Apple">Samsung<br>
+        <input type="radio" id="redmi" name="mobile" value="Apple">Redmi<br>
+        <br>
+        <input type="button" value="Check Price" onclick="checkPrice()">
+    </body>
+
+    <script>
+        function checkPrice() {
+            var applePrice = '$700'
+            var samsungPrice = '$550'
+            var redmiPrice = '$200'
+
+            if (document.getElementById('apple').checked == true){
+                alert(applePrice)
+            } else if (document.getElementById('samsung').checked == true) {
+                alert(samsungPrice)
+            } else if (document.getElementById('redmi').checked == true) {
+                alert(redmiPrice)
+            } else {
+                alert("Please select an option")
+            }
+            
+        }
+    </script>
+</html>

@@ -1,0 +1,54 @@
+How to make a request from JavaScript
+
+    To kick things off, we’ll start with a URL. After all, we need to tell
+    the browser where to get the data we’re after:
+
+        var url = "http://someserver.com/data.json";
+
+    Next we’ll create a request object, like this:
+        var request = new XMLHttpRequest();
+
+    Next we need to tell the request object which URL we want it to
+    retrieve along with the kind of request it should use (we’ll use the
+    standard HTTP GET request like we saw on the previous page). To do
+    this, we’ll use the request object’s open method. Now "open" sounds
+    like a method that not only sets these values in the request object,
+    but also opens the connection and retrieves the data. It doesn't.
+    Despite the name, open just sets up the request with a URL and tells
+    the request object the kind of request to use so that XMLHttpRequest
+    can verify the connection. Here's how we call the open method:
+
+        XMLHttpRequest
+        request.open("GET", url);
+
+    Okay here’s the important part, and the trick of how XMLHttpRequest works: when
+    we finally ask our XMLHttpRequest object to retrieve data, it’s going to go off
+    on its own and get the data. It might take a 90 milliseconds (quite a while in
+    compute time), or, on a slow day, it might take ten seconds (an eternity in
+    compute time). So rather than just waiting around for the data, we're going
+    to provide a handler that is called when the data arrives. Here's how you set
+    up the handler (this should look somewhat familiar):
+
+    request.onload = function() {
+        if (request.status == 200) {
+            alert("Data received!");
+        }
+    };
+
+
+    Just one last step: we still need to tell the request to go out and get the data, and
+    to do that we use the send method:
+
+    request.send(null);
+
+
+    The data from the HTTP GET retrieval can be found in the responseText property of the request object. So
+    we can write code like this:
+    request.onload = function() {
+        if (request.status == 200) {
+            alert(request.responseText);
+        }
+    };
+
+    But hang on, we’re just about to the point of writing
+    some real code that uses request.responseText.

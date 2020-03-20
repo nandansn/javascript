@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Image Event Handling
+    </title>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+    <script>
+        window.onload = getImage
+
+        var tempImageSrc;
+
+        function getImage() {
+            //var image = document.getElementById("robot")
+            // alert(image)
+            //image.onclick = changeImage
+
+            var images = document.getElementsByTagName("img")
+            alert(typeof images)
+            for (let index = 0; index < images.length; index++) {
+                const element = images[index];
+
+                element.onmouseover = changeImage
+                element.onmouseout = resetImage
+
+            }
+
+        }
+
+
+
+        function changeImage(eventObject) {
+            tempImageSrc = eventObject.target.src;
+            eventObject.target.src = "after.jpg";
+            //document.getElementById("robot").src = 
+
+        }
+
+        function resetImage(eventObject) {
+            console.log(tempImageSrc)
+            eventObject.target.src = tempImageSrc
+        }
+    </script>
+</head>
+
+<body>
+    <img src="ppt.jpg">
+    <img src="profile-image.jpg">
+
+
+</body>
+
+
+
+
+
+</html>

@@ -1,0 +1,16 @@
+How JavaScript interacts with your page
+    JavaScript and HTML are two different things. HTML is
+    markup and JavaScript is code. So how do you get JavaScript
+    to interact with the markup in your page? You use the
+    Document Object Model.
+
+
+    When you load a page into the browser, the browser parses the HTML and creates an internal model of your document, that contains all the elements of your HTML markup.
+
+    Your JavaScript can interact with the DOM to get access to the elements and the content in them. JavaScript can also use the DOM to create or remove elements (among a number of other
+    things we’ll be getting to).
+
+    When JavaScript modifies the DOM, the browser updates the page dynamically, so you see new content on your page.
+
+
+    

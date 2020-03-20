@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+
+<html>
+
+<head>
+    <title>
+        Prototype Example
+    </title>
+</head>
+
+<body>
+    <script>
+        function Vehicle(color, regNumber, type) {
+
+            this.color = color;
+            this.regNumber = regNumber;
+            this.type = type;
+
+        }
+
+        Vehicle.prototype.start = function () {
+            console.log('started')
+        }
+
+        Vehicle.prototype.stop = function () {
+            console.log('stopped')
+        }
+
+        function Car(carType, color, regNumber, type) {
+            Vehicle.call(color, regNumber, type)
+            this.carType = carType
+        }
+
+        Car.prototype = new Vehicle('red', 1234, '4-wheeler')
+
+        Car.prototype.load = function () {
+            console.log('Max load is 1000 kg')
+        }
+
+
+        window.onload = function () {
+
+
+            var maruti = new Car('Commercial', 'red', 1234, '4-wheeler')
+            maruti.load()
+            maruti.start()
+            maruti.stop()
+
+
+        }
+    </script>
+
+</body>
+
+</html>

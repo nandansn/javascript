@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            DOM - Mouse Events
+        </title>
+    </head>
+    <body>
+        <div id="imgSection">
+            <img id="image" src="images/bike.jpg" onmouseover="carImage()" onmouseout="bikeImage()" width="500">
+        </div>
+    </body>
+    <script>
+            function carImage() {
+                document.getElementById('image').src = 'images/car.jpg'
+            }
+            function bikeImage() {
+                document.getElementById('image').src = 'images/bike.jpg'
+            }
+    </script>
+</html>

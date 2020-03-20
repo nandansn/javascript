@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>
+        Prototype in Objects
+    </title>
+</head>
+
+<body>
+    <div><span>Click Here</span></div>
+
+    <script>
+        function Car(carParam) {
+            this.color = carParam.color;
+            this.model = carParam.model;
+            this.detail = function () {
+                console.log(this.color)
+            }
+        }
+
+
+        window.onload = function () {
+            var marutiParam = {
+                color: "red",
+                model: "maruti"
+            }
+
+            var bmwParam = {
+                color: "red",
+                model: "GT",
+
+
+            }
+
+            Car.prototype.start = function () {
+                console.log(this.model + " started")
+            }
+
+
+            var marutiCar = new Car(marutiParam);
+            var bmwCar = new Car(bmwParam)
+
+            marutiCar.detail();
+            marutiCar.start();
+            bmwCar.detail();
+            bmwCar.start = function () {
+                console.log(this.model + " started from BMW")
+            }
+
+            bmwCar.start();
+
+
+        }
+    </script>
+
+</body>
+
+</html>

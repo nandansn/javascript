@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            DOM Select Box
+        </title>
+    </head>
+    <body>
+        <select onchange="displaySelected()" id="selectGender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Others</option>
+        </select>
+    </body>
+    <script>
+        var selectElement = document.getElementById('selectGender');
+
+        function displaySelected() {
+            alert(selectElement.options[selectElement.selectedIndex].innerText);
+        }
+    </script>
+</html>

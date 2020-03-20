@@ -1,0 +1,50 @@
+events:
+    mouse click
+    cursor movement
+    key clicks
+    ..etc
+
+event handler:
+    is a function
+
+
+example
+    1. create a functions that handles page load event when it occurs.
+    2. wire up things, so the browser knows, there is a function to be onvoked when load event occurs.
+
+
+event object:
+    how the event object works?
+        1. you click an image
+        2. click event is triggered
+        3. click event creates an event object.
+        4. that is then passed to event handler object.
+        5. in the event handler function you can use event object to determine the things about the event, like what type of event occurred and which element generated the event.
+        6. eventObject.target tells which element generated the event.
+
+
+events and queues:
+    Browser maintains queue of events
+    Browser processes these events one at a time.
+    Need to keep these handlres short and efficient.
+
+Code laboratory:
+we can use the function like an expression.
+
+var sum = function(a,b) {
+    var c = a + b;
+}
+
+sum(a,b);
+
+image.onclick = function() {
+    alert("element clicked")
+}
+
+
+time out:
+    setTimeout(eventHandlerFunction, 5000)
+
+    setTimeout method in the window object is called, after 5 seconds of page gets loaded.
+
+

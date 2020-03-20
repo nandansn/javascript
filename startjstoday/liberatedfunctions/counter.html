@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Counter - Closure Function
+    </title>
+    <h1>Closure Example</h1>
+</head>
+
+<body>
+    <button id="count">Count</button>
+</body>
+
+<script>
+    window.onload = init
+
+    function init() {
+        var element = document.getElementById('count')
+        var countMe = counter
+        element.onclick = countMe() // for anaonymous function use the parantheses
+    }
+
+    function counter() {
+
+        var counter = 0
+        console.log('counter')
+
+        return function () {
+            console.log('count')
+            counter++;
+            console.log(counter)
+        }
+
+
+
+    }
+</script>
+
+</html>

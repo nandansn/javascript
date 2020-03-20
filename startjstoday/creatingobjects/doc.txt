@@ -1,0 +1,118 @@
+Creating objects with object literals:
+--------------------------------------
+
+var taxi = {
+    make: "Webville Motors",
+    model: "Taxi",
+    year: 1955,
+    color: "yellow",
+    passengers: 4,
+    convertible: false,
+    mileage: 281341,
+    started: false,
+    start: function() { this.started = true;},
+    stop: function() { this.started = false;},
+    drive: function {
+    // drive code here
+}
+};
+
+Brain Power:
+------------
+
+    Tired fingers from a lot of typing! The code for the start, stop and drive
+    methods would have to be duplicated over
+    Can you ensure that each taxi has the and over.
+    same properties? What if you make a
+    mistake or typo, or leave out a property?
+    What if you decide to add or delete a
+    property (or to change the way start
+    or stop work)? You’d have to make the
+    change in all the taxis.
+    A lot of object literals means a lot of code.
+    Isn’t that going to lead to slow download
+    times for the browser? Who needs taxis when we have Uber?
+
+Introducing Object Constructors
+    Object constructors, or “constructors” for short, are your path to better
+    object creation. Think of a constructor like a little factory that can
+    create an endless number of similar objects.
+
+
+Note : Object constructors and functions are closely related. Keep that in mind as you’re learning how to write and use constructors.
+
+
+How to create a Constructor
+    Using constructors is a two-step process: 
+        1. first we define a constructor
+        2. we use it to create objects. Let’s first focus on creating a constructor.
+
+function Dog(name, breed, weight) {
+    this.name = name;
+    this.breed = breed;
+    this.weight = weight;
+}
+
+    A constructor function looks just like a regular function.
+    But notice that we give the name  of the constructor function a capital letter. This isn’t required; but everyone does it as a convention
+    The parameters of the function match the properties we want to supply for each individual dog. 
+    The property names and parameter names don’t have to be the same, but they often are—again, by conventio
+    Notice that this constructor function doesn't return anything.
+    Hmm, we’re not using local variables like in most functions. Instead we’re using the this keyword, and we’ve only used that inside objects so far.
+    Hang on; we’ll look at how we use the constructor next and then all this is going to fall into place and make more sense.
+
+How to use a Constructor
+    We said using a constructor is a two-step process: first we create a constructor, then we
+    use it. Well, we’ve created a Dog constructor, so let’s use it. Here’s how we do that:
+        var fido = new Dog("Fido", "Mixed", 38);
+    To create a dog, we use the new
+    operator with the constructor.
+    Followed by
+    a call to the
+    constructor.
+    So, to create a new dog object with a name of “Fido”, a breed of “Mixed” and a
+    weight of 38, we start with the new keyword and follow it by a call to the constructor
+    function with the appropriate arguments. After this statement is evaluated, the
+    variable fido will hold a reference to our new dog object.
+
+
+How constructors work
+
+    var fido = new Dog("Fido", "Mixed", 38);
+    
+    1. The first thing new does is create a new, empty object
+    2. Next, new sets this to point to the new object
+    3. With this set up, we now call the function Dog,
+        passing "Fido", "Mixed" and 38 as arguments.
+        
+        function Dog(name, breed, weight) {
+        this.name = name;
+        this.breed = breed;
+        this.weight = weight;
+        }
+    4. Next the body of the function is invoked.
+       Like most constructors, Dog assigns values to
+       properties in the newly created this object.
+
+    5. Finally, once the Dog function has completed its execution
+        the new operator returns this, which is a reference to the
+        newly created object. Notice this is returned for you; you
+        don’t have to explicitly return it in your code. And after the
+        new object has been returned, we assign that reference to
+        the variable fido.
+
+
+You can put methods into constructors as well
+
+    function Dog(name, breed, weight) {
+        this.name = name;
+        this.breed = breed;
+        this.weight = weight;
+        this.bark = function() {
+        if (this.weight > 25) {
+        alert(this.name + " says Woof!");
+        } else {
+        alert(this.name + " says Yip!");
+        }
+        };
+}

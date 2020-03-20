@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      API
+    </title>
+  </head>
+
+  <body>
+    <div id="service">
+      <button id="callService">Call the Service</button>
+      <div>
+        <table id="employee"></table>
+      </div>
+    </div>
+    <div id="status"></div>
+    <div id="response"></div>
+    <script>
+      window.onload = function() {
+        var url = "http://dummy.restapiexample.com/api/v1/employees";
+
+        var request = new XMLHttpRequest();
+
+        var jsonServerResponse = "";
+
+        document.getElementById("callService").onclick = function() {
+          console.log("calling the service");
+          request.open("GET", url);
+
+          request.send(null);
+
+          request.onload = function() {
+            if (request.status == 200) {
+              document.getElementById("status").innerHTML = "success";
+              jsonServerResponse = JSON.parse(request.responseText);
+              var table = document.getElementById("employee");
+              var tableHead = document.createElement("thead");
+              var tableHeadRow = document.createElement("tr");
+
+              for (const key in jsonServerResponse.data[0]) {
+                var tableHeadColumn = document.createElement("th");
+                tableHeadColumn.innerText = key;
+                tableHeadRow.appendChild(tableHeadColumn);
+              }
+              tableHead.appendChild(tableHeadRow);
+              table.appendChild(tableHead);
+              var tableBody = document.createElement("tbody");
+              for (const key in jsonServerResponse.data) {
+                const element = jsonServerResponse.data[key];
+                var tableRow = document.createElement("tr");
+                table.appendChild(tableRow);
+                for (const property in element) {
+                  console.log(property + ":" + element[property]);
+                  var tableColumn = document.createElement("td");
+                  tableColumn.innerText = element[property];
+                  tableRow.appendChild(tableColumn);
+                }
+                tableBody.appendChild(tableRow);
+              }
+              table.appendChild(tableBody);
+            } else {
+              alert("error");
+            }
+          };
+        };
+      };
+    </script>
+  </body>
+</html>

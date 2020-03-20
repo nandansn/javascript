@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            DOM Regex Testing
+        </title>
+    </head>
+    <body>
+        <div id="formMessage">
+            <label id="messageLabel" style="color:green; visibility: hidden">Form Submitted Successfully.</label>
+        </div>
+        <div>
+            <form action="regex-one.html" >
+                <label id="invalidFname" style="color:red; visibility: hidden">Invalid First Name</label>
+                <input id="idFname" type="text" name="fname" placeholder="First Name">
+                <input type="button" value="Submit Details" onclick="validate()">
+            </form>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function validate() {
+            
+            var regex = new RegExp("^[a-zA-Z]+$")
+            var fnameElement = document.getElementById("idFname").value
+           
+            if (regex.test(fnameElement)){
+                document.getElementById("invalidFname").style.visibility ="hidden"
+                document.getElementById("messageLabel").style.visibility = "visible"
+                
+            } else{
+                document.getElementById("messageLabel").style.visibility = "hidden"
+                document.getElementById("invalidFname").style.visibility ="visible"
+            }
+        }
+    </script>
+</html>

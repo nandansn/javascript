@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            DOM Manip -1
+        </title>
+    </head>
+    <body>
+        <input type="button" title="click me" value="click me" onclick="showText()">
+
+        <div id="divText">
+
+        </div>
+    </body>
+    <script>
+        function showText(){
+            document.getElementById("divText").innerHTML = "Hello World"
+        }
+    </script>
+</html>

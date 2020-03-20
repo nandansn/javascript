@@ -1,0 +1,275 @@
+function evaluation order:
+
+1. We start at the top of the code and find all the function declarations.
+4. We start at the top again, this time evaluating the code.
+
+5. Create the variable migrating and set it to true.
+var migrating = true;
+
+6. The conditional is true, so evaluate the code block.
+if (migrating) {
+
+7. Get the function reference from quack and invoke it with the argument 4.
+quack(4);
+
+8. Get the function reference from fly... oh wait, fly isn’t defined
+because fly doesn’t get defined until this statement is evaluated, which is after the call to fly. Whrn u try to execute the code: TypeError: undefined is not a function
+fly(4);
+}
+var fly = function(num) {
+for (var i = 0; i < num; i++) {
+console.log("Flying!");
+}
+};
+2. We found a function declaration. We create the
+function and assign it to the variable quack.
+function quack(num) {
+for (var i = 0; i < num; i++) {
+console.log("Quack!");
+}
+}
+
+3. We reach the bottom. Only one function declaration was found.
+
+So what does this all mean? For starters, it means that you can place function
+declarations anywhere in your code—at the top, at the bottom, in the middle—and
+invoke them wherever you like. Function declarations at the top level of your code create
+functions that are defined everywhere in your code (this is known as hoisting).
+Function expressions are obviously different because they aren’t defined until they are
+evaluated. So, even if you assign the function expression to a global variable, like we did
+with fly, you can’t use that variable to invoke a function until after it’s been defined.
+Now in this example, both of our functions have global scope—meaning both functions
+are visible everywhere in your code once they are defined. But we also need to consider
+nested functions—that is functions defined within other functions—because it affects the
+scope of those functions
+
+A little review of lexical scope
+
+var justAVar = "Oh, don't you worry about it, I'm GLOBAL";
+function whereAreYou() {
+var justAVar = "Just an every day LOCAL";
+return justAVar;
+
+1. When this function is called, it returns justAVar. But which one?
+We're using lexical scope, so we find the justAVar value by looking
+in the nearest function scope. And if we can't find it there, we
+look in the global scope
+}
+var result = whereAreYou();
+console.log(result);
+
+So, when we call whereAreYou, it
+returns the value of the local
+justAVar, not the global one.
+
+-----------------------------------------
+
+var justAVar = "Oh, don't you worry about it, I'm GLOBAL";
+function whereAreYou() {
+var justAVar = "Just an every day LOCAL";
+function inner() {
+return justAVar;
+
+But now we have a nested function, that refers to
+justAVar. But which one? Well, again, we always use
+the variable from the closest enclosing function. So
+we're using the same variable as the last time.
+
+}
+return inner();
+}
+var result = whereAreYou(); <- So when we call whereAreYou,
+the inner function is invoked, and
+returns the value of the local
+justAVar, not the global one
+console.log(result);
+
+
+--------------------------------------------
+
+var justAVar = "Oh, don't you worry about it, I'm GLOBAL";
+function whereAreYou() {
+    1. First we encounter a local variable, named
+justAVar. We assign the string “Just an
+every day LOCAL” to the variable
+    2. We haven’t mentioned this before,
+but all local variables are stored in an
+environment.
+
+
+var justAVar = "Just an every day LOCAL";
+function inner() {
+    3. We then create a function, with the name inner.
+    return justAVar;
+}
+4. And finally, when we return
+the function, we don’t just
+return the function; we
+return the function with the
+environment attached to it.
+
+return inner;
+}
+1. First, we call whereAreYou. We already know that returns a function
+reference. So we create a variable innerFunction and assign it that
+function. Remember, that function reference is linked to an environment
+
+var innerFunction = whereAreYou();
+
+Next we call innerFunction. To do that we evaluate the code in the
+function’s body, and do that in the context of the function’s environment,
+like this:
+var result = innerFunction();
+
+Last, we assign the result of the function to the result variable,
+and then display it in the console.
+console.log(result);
+
+Rule:
+Remember that JavaScript functions are always
+evaluated in the same scoping environment in which
+they were defined. Within a function, if you want to
+determine where a variable is coming from, search in
+its enclosing functions, from the most nested to the least.
+
+
+Using closures to implement a magic counter
+
+function makeCounter() {
+
+    Here, we’re putting the count variable in
+    the function makeCounter. So now count
+    is a local variable, not a global variable.
+    var count = 0;
+    function counter() {
+        Now, we create the counter
+        function, which increments
+        the count variable
+        count = count + 1;
+        return count;
+    }
+    return counter; And return the counter function. This is the closure. It holds count in its environment
+}
+
+function makeCounter() {
+    var count = 0;
+    function counter() {
+        count = count + 1;
+        return count;
+    }
+    return counter;
+}
+var doCount = makeCounter();
+console.log(doCount());
+console.log(doCount());
+console.log(doCount());
+
+1. We call makeCounter, which creates a
+counter function and returns it along with an
+environment containing the free variable, count.
+In other words, it creates a closure. The function
+returned from makeCounter is stored in doCount.
+2 We call the function doCount. This executes the
+body of the counter function.
+3 When we encounter the variable count, we look it
+up in the environment, and retrieve its value. We
+increment count, save the new value back into
+the environment, and return that new value to
+where doCount was called.
+4 We repeat steps 2 and 3 each time we call doCount.
+
+
+Creating a closure by passing a function expression as an argument:
+-------------------------------------------------------------------
+
+function makeTimer(doneMessage, n) {
+    setTimeout(function() {
+        alert(doneMessage);
+    }, n);
+}
+
+makeTimer("Cookies are done!", 1000);
+
+The closure contains the actual environment, not a copy
+-------------------------------------------------------
+
+function setTimer(doneMessage, n) {
+    setTimeout(function() {
+        alert(doneMessage);
+    }, n);
+    doneMessage = "OUCH!";
+}
+setTimer("Cookies are done!",1000);
+
+1. When we call setTimeout and pass to it the function
+expression, a closure is created containing the
+function along with a reference to the environment.
+
+    setTimeout(function() {
+        alert(doneMessage);
+    }, n);
+
+2. Then, when we change the value of
+doneMessage to “OUCH!” outside of the closure,
+it’s changed in the same environment that is
+used by the closure.
+    doneMessage = "OUCH!";
+
+3 1000 milliseconds later, the function in the closure
+is called. This function references the doneMessage
+variable, which is now set to “OUCH!” in the
+environment, so we see “OUCH!” in the alert.
+
+    function() { alert(doneMessage); }
+
+
+=======================================================
+
+An anonymous function is a
+function expression that has no
+name.
+ Anonymous functions can make your
+code more concise.
+ A function declaration is defined
+before the rest of your code is
+evaluated.
+ A function expression is evaluated
+at runtime with the rest of your
+code, and so is not defined until
+the statement in which it appears is
+evaluated.
+ You can pass a function expression
+to another function, or return a
+function expression from a function.
+ A function expression evaluates to a
+function reference, so you can use
+a function expression anywhere you
+can use a function reference.
+ Nested functions are functions
+defined inside another function.
+ A nested function has local scope,
+just like other local variables.
+
+Lexical scope means that we can
+determine the scope of a variable by
+reading our code.
+ To bind the value of a variable in a
+nested function, use the value that’s
+defined in the closest enclosing
+function. If no value is found, then
+look in the global scope.
+ Closures are a function along with a
+referencing environment.
+ A closure captures the value of
+variables in scope at the time the
+closure is created.
+ Free variables in the body of a
+function are variables that are not
+bound in the body of that function.
+ If you execute a function closure in
+a different context in which it was
+created, the values of free variables
+are determined by the referencing
+environment.
+ Closures are often used to capture
+state for event handlers.

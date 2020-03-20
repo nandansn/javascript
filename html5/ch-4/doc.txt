@@ -1,0 +1,410 @@
+If a variable is declared outside a function, it’s GLOBAL. If it’s declared inside a function, it’s LOCAL.
+
+Globals live: as long as the page. A global
+variable begins life when its JavaScript is loaded
+into the page. But, your global variable’s life ends
+when the page goes away. Even if you reload the
+same page, all your global variables are destroyed
+and then recreated in the newly loaded page.
+
+
+Local variables: typically disappear
+when your function ends. Local variables
+are created when your function is first called and
+live until the function returns (with a value or
+not). That said, you can take the values of your
+local variables and return them from the function
+before the variables meet their digital maker.
+
+
+Q: Keeping track of the scope of all these
+locals and globals is confusing, so why not just
+stick to globals? That’s what I’ve always done.
+A: If you’re writing code that is complex or that
+needs to be maintained over a long period of time,
+then you really have to watch how you manage your
+variables. When you’re overzealous in creating global
+variables, it becomes difficult to track where your
+variables are being used (and where you’re making
+changes to your variables’ values), and that can lead
+to buggy code. All this becomes even more important
+when you’re writing code with coworkers or you’re
+using third-party libraries (although if those libraries
+are written well, they should be structured to avoid
+these issues).
+So, use globals where it makes sense, but use them
+in moderation, and whenever possible, make your
+variables local. As you get more experience with
+JavaScript, you can investigate additional techniques
+to structure code so that it’s more maintainable.
+Q: I have global variables in my page, but I’m
+loading in other JavaScript files as well. Do those
+files have separate sets of global variables?
+A: There is only one global scope so every file
+you load sees the same set of variables (and creates
+globals in the same space). That’s why it is so
+important you be careful with your use of variables
+to avoid clashes (and reduce or eliminate global
+variables when you can).
+Q: I’ve seen code where people don’t use the
+var keyword when assigning a value to a new
+variable name. How does that work?
+A: Yes, that can be done; when you assign a
+value to a variable name that hasn’t been previously
+declared, it is treated as a new, global variable.
+So be careful, if you do this within a function you
+are creating a global variable. Note that we don’t
+recommend this coding practice; not only is it
+potentially confusing when reading code, some
+people think this behavior may change some day
+in the JavaScript implementations (which would
+probably break your code).
+Q: Do I need to define a function before I use
+it, or can it appear anywhere in my script?
+A: Function declarations can appear anywhere
+in your script. You can declare a function below
+where you use it if you want. This works because
+when you first load your page, the browser parses
+all the JavaScript in the page (or in the external
+file) and sees the function declaration before it
+starts executing the code. You can also put your
+global variable declarations anywhere in your script,
+although we recommend declaring all your global
+variables at the top of your files so they’re easy to
+locate.
+One thing to keep in mind when using more than
+one external JavaScript file is that if you have two
+functions in different files named the same thing, the
+function that the browser sees last will be the one
+that is used.
+Q: Everyone seems to complain about the
+overuse of global variables in JavaScript. Why
+is this? Was the language badly designed or do
+people not know what they’re doing, or what?
+And what do we do about it?
+A: Globals are often overused in JavaScript.
+Some of this is because the language makes it easy
+to just jump in and start coding—and that’s a good
+thing—because JavaScript doesn’t enforce a lot of
+structure or overhead on you. The downside is when
+people write serious code this way and it has to be
+changed and maintained over the long term (and
+that pretty much describes all web pages). All that
+said, JavaScript is a powerful langauge and includes
+features like objects that you can use to organize
+your code in a modular way. Many books have been
+written on that topic alone, and we’re going to give
+you just a taste of objects in the second half of this
+chapter (which is only a few pages away).
+
+
+functions are also values:
+
+function addOne(num) {
+return num + 1;
+}
+var plusOne = addOne;
+var result = plusOne(1);
+
+What you can do with functions as values?
+So what’s the big deal? Why is this useful? Well, the important thing isn’t so much that
+we can assign a function to a variable, that’s just our way of showing you that a function
+actually is a value. And you know you can store values in variables or arrays, you can pass
+them as arguments to functions, or as we’ll soon see, you can assign them to the properties
+of objects.
+
+
+Objects:
+
+Here’s the secret to JavaScript objects: they’re just a collection of properties. Let’s
+take an example, say, a dog. A dog’s got properties
+
+How to create an object in JavaScript
+
+var fido = {
+name: "Fido",
+weight: 40,
+breed: "Mixed",
+loves: ["walks", "fetching balls"]
+};
+
+Access object properties with “dot” notation
+
+fido.weight
+
+Access properties using a string with [] notation
+
+fido["weight"]
+
+Change a property’s value
+
+fido.weight = 27;
+
+Enumerate all an object’s properties
+
+To enumerate is to go through all the properties of the object.
+
+var prop;
+    for (prop in fido) {
+        alert("Fido has a " + prop + " property ");
+        if (prop == "name") {
+        alert("This is " + fido[prop]);
+    }
+}
+
+Have fun with an object’s array:
+    var likes = fido.loves;
+    var likesString = "Fido likes";
+    for (var i = 0; i < likes.length; i++) {
+    likesString += " " + likes[i];
+    }
+    alert(likesString);
+
+Pass an object to a function:
+
+    function bark(dog) {
+        if (dog.weight > 25) {
+        alert("WOOF");
+        } else {
+        alert("yip");
+        }
+    }
+    bark(fido);
+
+Yes, you can add or delete properties at any time.
+To add a property to an object you simply assign a new property a
+value, like this:
+
+fido.age = 5;
+
+and from that point on fido will have a new property: age.
+
+
+Likewise, you can delete any property with the delete keyword,
+like this:
+
+delete fido.age; 
+
+When you delete a property, you’re not just deleting the value of
+the property, you’re deleting the property itself. In fact, if you use
+fido.age after deleting it, it will evaluate to undefined.
+The delete expression returns true if the property was deleted
+successfully (or if you delete a property that doesn’t exist or if what
+you’re trying to delete isn’t a property of an object).
+
+
+
+Let’s talk about passing objects to functions
+We’ve already talked a bit about how arguments are passed to functions—arguments
+are passed by value, so if we pass an integer, the corresponding function parameter
+gets a copy of the value of that integer for its use in the function. The same rules hold
+true for objects, however we’ve got to look a little more closely at what a variable holds
+
+when it is assigned to an object to know what this means.
+    When an object is assigned to a variable, that variable holds a reference to the object,
+    not the object itself. Think of a reference as a pointer to the object.
+    So, when you call a function and pass it an object, you’re passing the object
+    reference—not the object itself, just a “pointer” to it. A copy of the reference is
+    passed into the parameter, which then points to the original object.
+        Dog
+        name: “Fido”
+        weight: 40
+        breed: “Mixed”
+        loves: [“walks”, “fetching balls”]
+        fido
+        ref
+When an object is assigned to a variable, the variable is given a reference to the object. It
+doesn’t “hold” the object itself. So, what does this all mean? Well, when you change a property of the object,
+you’re changing the property in the original object, not a copy, and so, you’ll see all the changes you make to an object within and outside of your function.
+
+Objects can have behavior too...
+    You didn’t think objects were just for storing numbers, strings and
+    arrays did you? Objects are active, they can do things. Dogs don’t
+    just sit there: they bark, run, play catch and a dog object should too!
+    Given everything you’ve learned in this chapter, you’re all set to add
+    behavior to your objects.
+
+
+When an object has a function in it, we say that object has a method.
+
+Constructor:
+    How to create Constructor?
+        function Dog(name, breed, weight) {
+            this.name = name;
+            this.breed = breed;
+            this.weight = weight;
+            this.bark = function() {
+            if (this.weight > 25) {
+                alert(this.name + " says Woof!");
+                } else {
+                alert(this.name + " says Yip!");
+                }
+            };
+        }
+
+
+Using the constructor:
+    Now that we’ve got our factory built, we can use it to create some dogs.
+There’s only one thing we haven’t told you, which is that you need to call
+a constructor function in a special way by putting the keyword new before
+the call. Here are some examples:
+    var fido = new Dog("Fido", "Mixed", 38);
+    var tiny = new Dog("Tiny", "Chawalla", 8);
+    var clifford = new Dog("Clifford", "Bloodhound", 65);
+    fido.bark();
+    tiny.bark();
+    clifford.bark();
+
+“this” always refers to the object the method was invoked
+on, no matter how many dogs we create to bark:
+
+
+Q: What’s the real difference between a function and
+a method? After all, if they’re the same thing why call them
+something different?
+A: By convention, if an object has a function we call that a
+method. They both work the same way, except that you invoke
+an object’s method using the dot operator, and a method can use
+this to access the object on which the method is invoked. Think
+of a function as a standalone piece of code you can invoke, and a
+method as behavior that is attached to a specific object.
+Q: So when I create objects with a constructor and those
+objects have a method, then all of those objects share the
+same code for that method?
+A: That’s right, and that’s one of the advantages of objectoriented
+programming: you can create the code for that class of
+objects (say all your dog objects) in one place and all the dogs
+share it. Now the way you make it specific to each dog is with
+your properties and using this to access those properties.
+Q: Can I set this to a value of my choosing, and if I do,
+will that mess things up?
+A: No, you can’t set this to anything. Remember, this is
+a keyword, not a variable! It looks and acts a bit like one, but it’s
+not a variable.
+Q: Does this have a value outside of an object method?
+A: No, if you’re not invoking an object method, then this is
+undefined.
+Q: So the way to think about this is when I invoke a
+method on an object, the value of this is set to that object
+the entire time the method is being evaluated?
+A: Within the body of the object, yes, this will always be the
+object itself. There are some advanced cases where it may not
+be true; for instance, things get more complicated when you have
+objects within objects, and if you start doing that, you’ll need to
+look up the semantics, but this is a good general rule.
+Q: I’ve heard that in object-oriented programming I can
+have classes of objects and they can inherit from each other.
+Like, I could have a mammals class that both dog and cat
+inherit from. Can I do that in JavaScript?
+A: You can. JavaScript uses something called prototypal
+inheritance, which is an even more powerful model than strictly
+class-based models. Getting into prototypal inheritance is a little
+beyond the scope of this book, but who knows, we could be
+convinced to write more on JavaScript.
+Q: So when we say new Date(), we’re using a constructor,
+right?
+A: Yes, good catch! Date is a built-in constructor in JavaScript.
+When you say new Date(), you get a Date object with a
+bunch of useful methods you can use to manipulate the date.
+Q: What's the difference between objects we write out
+ourselves and ones we create with a constructor?
+A: The main difference is how you create them. Objects you
+write out yourself using curly braces and comma separated
+properties are known as “object literals.” You literally type them
+into your code! If you want another one like it, you have to
+type it in yourself and make sure it’s got the same properties.
+Objects created by a constructor are created by using new and
+a constructor function, which returns the object. You can use the
+constructor function to create many objects that have the same
+properties, but different property values if you want.
+
+
+What is the window object anyway?
+
+    When you’re writing code for the browser, the window
+object is always going to be part of your life. The window
+object represents both the global environment for your
+JavaScript programs and the main window of your
+app, and as such, it contains many core properties and
+methods.
+
+        window
+            property
+                location
+                status
+                onload
+                document
+            Functions:
+                alert
+                prompt
+                open
+                close
+                setTimeout
+                setInterval
+
+Another look at the document object
+    The document object is another familar face; it’s the object we’ve been using
+    to access the DOM. And, as you’ve just seen, it is actually a property of the
+    window object. Of course we haven’t used it like window.document because we
+    don’t need to.
+
+
+    document
+        property
+            domain
+            title
+            URL
+        function
+            getElementById
+            getElementsByTagName
+            getElementsByClassName
+            createElement
+
+
+Q: Since window is the global object, that means I can use
+its properties and all of its methods without specifying window
+first right?
+A: That’s right. And whether you prepend the window object’s
+properties and methods with window is up to you. For things like
+alert, everyone knows what that is, and no one uses window with
+it. On the other hand, if you’re using the lesser known properties
+or methods you might want to to make your code more easily
+understandable, and use window.
+Q: So, technically, I could write onload = init
+instead of window.onload = init, right?
+A: Yes. But we don’t recommend it in this particular case, because
+there are a lot of objects that have onload properties, so your code is
+going to be much clearer if you use window. in front of onload.
+Q: The reason we don’t say window.onload = init()
+is because that would call the function, instead of using its
+value?
+A: That’s right. When you use parentheses after the function name,
+like init(), you saying you want to call the function init. If you use its
+name without parentheses, then you’re assigning the function value
+to the onload property. It’s a subtle difference when you’re typing it
+in, but the ramifications are large, so pay careful attention.
+
+Which of the two ways of creating a window.onload
+handler is better, using a function name or an anonymous
+function?
+A: One isn’t better than the other, they both do basically the same
+thing: set the value of window.onload to a function that will run
+when the page has loaded. If you need to call init from another
+function later in your program for some reason, then you’ll need to
+define an init function. Otherwise, it doesn’t matter which way
+you do it.
+
+Q: What’s the difference between built-in objects like window
+and document, and the ones we make?
+A: One difference is that built-in objects follow the guidelines
+set by specifications, so you can refer to the W3C specifications to
+understand all their properties and methods. In addition, many of the
+built-in objects, like String, may have properties that are immutable
+and can not be changed. Other than that, objects are objects. The
+nice thing about built-in objects is they’re already built for you.
+So take a little R&R after
+this chapter, but before you
+go please take a quick look at the
+bullet points, and do the crossword
+to make it all stick.
+Yes, String is an object! Check out a

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Calc
+        </title>
+    </head>
+    <body>
+        <input id="x" type="text" placeholder="enter number">
+        <input id="y" type="text" placeholder="enter number">
+        <input type="button" value="+" onclick="add()">
+
+        <div id = "result">
+
+        </div>
+    </body>
+    <script>
+            function add() {
+
+                if (document.getElementById("x").value.match("^[0-9]+$")){
+                    document.getElementById("result").innerText = new Number(document.getElementById("x").value) + new Number(document.getElementById("y").value)
+                }
+                else{
+                    alert("enter numbers only..")
+                }
+                
+               
+            }
+    </script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Constructor Chapter 1
+    </title>
+</head>
+
+<body>
+    <button id="cars">Cars Available</button>
+    <div id="today"></div>
+    <script>
+        window.onload = initCars
+
+        function Car(model, color, price) {
+            this.model = model
+            this.color = color
+            this.price = price
+            this.details = function () {
+                console.log(this.model + " " + this.color + " " + this.price)
+            }
+        }
+
+        function initCars() {
+
+            var baleno = new Car("Baleno", "Red", "6 Laks")
+            var bmw = new Car("BMW", "Red", "1 Crore")
+            var fortuner = new Car("BaleFortunerno", "Silver", "25 Laks")
+
+
+
+            var cars = [baleno, bmw, fortuner]
+
+            document.getElementById("cars").onclick = function () {
+                var today = new Date();
+                document.getElementById("today").innerHTML = today.getUTCDate()
+                cars.forEach((c) => {
+                    console.log(c.details())
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

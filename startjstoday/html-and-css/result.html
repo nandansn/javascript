@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Login Result
+    </title>
+</head>
+
+<body>
+    <h1>Logged in</h1>
+    <div id="welcome"></div>
+
+    <script>
+        window.onload = function () {
+
+            document.getElementById("welcome").innerHTML = localStorage.getItem('userName')
+        }
+    </script>
+</body>
+
+</html>

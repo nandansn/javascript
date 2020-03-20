@@ -1,0 +1,70 @@
+1. Primitive
+    String 
+    Numbers
+    Boolean
+2. Objects
+    document
+    element
+    Car
+    Math
+
+undefined, is a value. Type of undefined is undefined.
+
+typeof:
+    typeof operator.
+    ex:
+        var name = "nanda"
+        typeof name, returns String, return type of typeof is string.
+
+null:
+    null is typeof Objects
+
+undefined
+    undefined is typeof undefined
+
+
+document.getElementById('head') if the element is not found the method returns null.
+
+
+NaN - not a number. In some cases javascript unable to generate the number. In that case NaN is assigned
+
+example: var name = 10 * 'nanda'
+to check NaN, use isNaN(name)
+
+
+comparison operatod ==
+
+    1. if the two variables are same type, it compares straight away and returns the result.
+
+    2. If they are different,
+
+        1. comparing number and a string,
+            1 == "1"
+            string is converted to number and two numbers are compared.
+        
+        2. comparing boolean with anyother type.
+            true/false value converted to number "1"/"0"
+            then the value "1"/"0" converted to boolean
+            1 == true
+            0 == false
+
+        3. undefined == null, always equal
+        4. 1 == "", converted like below,
+           1 == 0 
+
+
+strict equality === and non-equality !==
+only one rule,
+returns true if type and the value are equal.
+
+How JS converts string to number,
+uses algo to parse the individual char from string and convert them into number.
+
+
+How to compare two objects?
+
+    1. we are comparing references, so if the 2 variables refer same object then they will be equal.
+
+String operations:
+    var name ="nanda kumar "
+    name.trim()

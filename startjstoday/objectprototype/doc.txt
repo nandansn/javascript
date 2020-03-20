@@ -1,0 +1,154 @@
+What are prototypes ?
+
+    JavaScript uses what is known as prototypal inheritance, and the object you’re inheriting behavior from is called the prototype. The whole point of this scheme is to inherit and reuse
+existing properties (including methods), while extending those properties in your brand new object
+
+
+How inheritance works
+    1. First we need some code. How about we call the bark method of a dog object, like this: fido.bark();
+    2. To evaluate this code we look in the fido instance for a bark method. But there isn’t one.
+    3. If we can’t find bark in the fido instance, then we take a look next at its prototype.
+    4. Checking the Dog prototype we see it does have a bark method.
+    5. Finally, once we find the bark method, we invoke it, which results in Fido function bark() { barking.
+
+
+Overriding the prototype
+
+    We can always override properties and methods by supplying them in the object instance. That works because JavaScript always looks in the object instance—that is, the specific dog object—for a
+property before it looks in the prototype.
+
+So where do you get a prototype?
+    Dog.prototype
+
+How to set up the prototype
+
+
+Q and A
+Q:So when I add a new method or property to a prototype,
+all the object instances that inherit from it immediately see it?
+A: If by “see it” you mean that they inherit that method or property,
+you are correct. Notice that this gives you a way to extend or change
+the behavior of all your instances at runtime by simply changing their
+prototype.
+
+Q: I see how adding a new property to a prototype makes
+that property available to all the objects that inherit from
+the prototype. What if I change an existing property in the
+prototype; does that affect those objects in the same way? Like
+if I change the property species to “Feline” instead of “Canine”,
+does that mean all existing dogs are now “Feline” species?
+A: Yes. If you change any property in the prototype, it affects all
+the objects that inherit from that prototype, unless that object has
+overridden that property.
+
+
+Setting up a chain of prototypes
+
+    Rather than having an instance that inherits properties from just one prototype, there might be a chain of one or more prototypes your instance can inherit from. This is like,
+    multilevel inheritance.
+
+    How inheritance works in a prototype chain
+
+        Dog prototype
+            Show Dog prototype
+                Show Dog object
+
+    First, we need an object tha t inherits from the dog prototype.
+
+
+    var aDog = new Dog();
+
+    function ShowDog(name, breed, weight, handler) {
+        this.name = name;
+        this.breed = breed;
+        this.weight = weight;
+        this.handler = handler;
+    }
+
+    ShowDog.prototype = new Dog();
+
+What is Object?
+    Think of Object like the primordial object. It’s the object
+    that all objects initially inherit from. And Object implements
+    a few key methods that are a core part of the JavaScript
+    object system. Many of these you won’t use on a daily basis,
+    but there are some methods you’ll see commonly used.
+    One of those you’ve already seen in this chapter:
+    hasOwnProperty, which is inherited by every object
+    (again, because every object ultimately inherits from Object).
+    Remember, hasOwnProperty is the method we used earlier
+    to determine if a property is in an object instance or in one
+    of its prototypes.
+    Another method inherited from Object is the toString
+    method, which is commonly overridden by instances. This
+    method returns a String representation of any object. We’ll
+    see in a bit how we can override this method to provide a
+    more accurate description of our own objects.
+    Object is the object
+    from which all objects
+    inherit.
+Object as a prototype
+    So whether you realized it or not, every object you’ve ever
+    created has had a prototype, and it’s been Object. You can
+    set an object’s prototype to another kind of object, like
+    we did with the show dog prototype, but ultimately, all
+    prototype chains eventually lead to Object.
+
+
+
+constructor
+    The constructor property points to the
+    constructor function connected to the prototype.
+hasOwnProperty
+    You know what the hasOwnProperty method does.
+isPrototypeOf
+    isPrototypeOf is a method you can use to find out
+    if an object is a prototype of another object
+propertyIsEnumerable
+    The propertyIsEnumerable method checks to
+    see if a property can be accessed by iterating
+    through all the properties of an object.
+
+
+toString
+toLocaleString
+    toLocaleString is a method, like toString, that converts an object
+    to a string. This method is designed to be overridden to provide a
+    localized string (say, for your country/language) about an object
+valueOf
+    valueOf is another method designed to be overridden. By
+    default it just gives you the object you call it on. But you can
+    override that to return another value instead if you want.
+
+
+Using inheritance to your advantage...
+by extending a built-in object
+
+    You already know that by adding methods to a prototype, you can add new
+    functionality to all instances of that prototype. This applies not only to your
+    own objects, but also to built-in objects.
+    Take the String object for instance—you’ve used String methods like
+    substring in your code, but what if you want to add your own method
+    so that any instance of String could make use of it? We can use the same
+    technique of extending objects through the prototype on Strings too.
+
+String.prototype.cliche = function() {
+    var cliche = ["lock and load","touch base", "open the kimono"];
+    for (var i = 0; i < cliche.length; i++) {
+        var index = this.indexOf(cliche[i]);
+            if (index >= 0) {
+                return true;
+            }
+        }
+    return false;
+};
+
+var sentences = ["I'll send my car around to pick you up.",
+            "Let's touch base in the morning and see where we are.",
+            "We don't want to open the kimono, we just want to inform them."];
+for (var i = 0; i < sentences.length; i++) {
+    var phrase = sentences[i];
+    if (phrase.cliche()) {
+        console.log("CLICHE ALERT: " + phrase);
+    }
+}

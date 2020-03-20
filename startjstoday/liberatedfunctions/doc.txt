@@ -1,0 +1,41 @@
+function expression:
+
+    example:
+        var displayName = function(name) {
+            console.log(displayName)
+        }
+
+
+        displayName(nanda)
+
+        displayName  is a function reference or reference to a function.
+
+        function expressions are evaluated later.
+
+        function expression returns reference to a new function created by the expression.
+
+
+    function declaration:
+        example:
+
+        function displayName(name) {
+            console.log(name)
+        }
+
+        function declaration is not a expression. function declaration is a statement.
+
+        function declarations are evaluated before rest of the code.
+
+        function declaration does not return a reference to a function.
+
+        function declaration does not create reference to a function, rather it creates a variable with the name of the function and assign the new function to it.
+
+        var newDisplay = displayName;
+        newDisplay('nanda')
+
+
+        start thinking about functions as values, just like numbers, strings, booleans or objects.
+         The thing that really makes a function value different from these other values is that we can invole it.
+
+
+Using closures to implement a magic counter

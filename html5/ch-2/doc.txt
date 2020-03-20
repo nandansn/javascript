@@ -1,0 +1,64 @@
+    There are lots of events happening in your
+browser all the time. If you want to respond to
+these events, you need to handle the events
+with event handlers.
+
+  A button click event is triggered when you click
+on a button in a web page.
+
+ You handle a button click event by registering
+a function to handle the event. You do this
+by writing a function, and setting the button’s
+onclick property to the function name.
+
+ If a button click event handler is registered,
+that function will be called when you click on
+the button.
+
+ You write code in the handler function to
+respond to the button click event. You can alert
+the user or update the page or something else.
+
+ To get the text a user has typed into a form
+input text field, you use the input’s value
+property.
+
+ If a user has not entered anything into a form
+input text field, the value of the field will be the
+empty string (“”).
+
+ You can compare a variable to the empty string
+using an if test and ==.
+
+
+To add a new element to the DOM, you first
+need to create the element and then add it as
+a child of an element.
+
+ Use document.createElement to create a new
+element. Pass the tag name (e.g., “li”) into the
+function call to indicate what element to create.
+
+ To add an element as a child of a parent
+element in the DOM, get a reference to the
+parent, and call appendChild on the parent,
+passing in the child element you’re adding.
+
+ If you add multiple children to a parent
+by using appendChild, each new child is
+appended after the other children, so they
+appear after or below the other children in the
+page (assuming you’re not changing the layout
+with CSS).
+
+ You can use the Web Storage API
+(localStorage) to store data in a user’s
+browser.
+
+ We used localStorage to save playlist songs,
+using Ready Bake Code. You’ll learn more
+about localStorage in Chapter 9.
+
+ You’ll learn more about the DOM and
+JavaScript features like functions and objects
+in the next chapter.

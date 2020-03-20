@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Treasure Hunt Game</title>
+</head>
+
+
+<body>
+    <img id="hunt" src="hunt.jpg">
+</body>
+
+
+<script>
+    window.onload = loadhunt
+
+    function loadhunt() {
+        var image = document.getElementById("hunt")
+        image.onclick = checkTreasure
+    }
+
+    function checkTreasure(eventObject) {
+        var targeImage = eventObject.target
+
+        if (eventObject.clientX >= 722 && eventObject.clientX <= 730) {
+            if (eventObject.clientY >= 457 && eventObject.clientY <= 460) {
+                console.log("tresure found")
+            }
+
+        }
+
+    }
+</script>
+
+</html>

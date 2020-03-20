@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Event Handling - Closure
+    </title>
+    <style>
+        body,
+        button,
+        div {
+            margin: 10px
+        }
+
+        div {
+            font-style: italic;
+            padding: 10px;
+            font-size: 20px;
+            font: bold
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <button id="clickMe">Click Me</button>
+    <br>
+    <br>
+    <div id="count"></div>
+    <script>
+        window.onload = initActionElements
+
+        function initActionElements() {
+            var buttonElement = document.getElementById("clickMe")
+            var counterNum = 0
+            buttonElement.onclick = function () {
+
+                counterNum++
+                var divElement = document.getElementById("count")
+                divElement.innerHTML = "Button is clicked for " + counterNum + " times !!"
+            }
+
+        }
+    </script>
+</body>
+
+</html>

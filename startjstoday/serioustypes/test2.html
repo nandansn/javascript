@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Comparing Objects
+    </title>
+</head>
+
+<body>
+    <script>
+        var car = {
+            name: 'maruti',
+            model: 'alto'
+        };
+        var car2 = car;
+
+        if (car == car2) {
+            alert('equal')
+        }
+
+        car2 = {
+            name: 'maruti',
+            model: 'alto'
+        }
+        if (car == car2) {
+            alert('equal')
+        } else {
+            alert('not equal')
+        }
+
+        if (car === car2) {
+            alert('strict equal')
+        } else {
+            alert('strict not equal')
+        }
+
+        car.color = 'red'
+
+        alert(car.name + " " + car.model)
+        alert(car.color)
+
+        delete car.name
+
+        alert(car.name) // undefined
+
+        for (const key in car) {
+            if (car.hasOwnProperty(key)) {
+                const element = car[key];
+                console.log(element)
+
+            }
+        }
+    </script>
+</body>
+
+</html>

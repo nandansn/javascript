@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        ToDo APP
+    </title>
+
+</head>
+
+<body>
+    <h1>To do App</h1>
+
+    <form>
+        <label id="error"></label>
+        <input placeholder="Enter task name.." id="todoText">
+        <input type="button" id="add" value="Add Task">
+        <input type="button" id="remove" value="Remove Tasks">
+
+    </form>
+
+    <ul id="todoList">
+
+    </ul>
+
+    <script>
+        window.onload = initElements
+
+        function initElements() {
+            var button = document.getElementById("add")
+
+            button.onclick = addToList
+
+            loadTaskList()
+
+            document.getElementById("remove").onclick = removeTasks
+
+
+        }
+
+        function loadTaskList() {
+            var taskArray = JSON.parse(localStorage.getItem("taskList"))
+
+            if (taskArray != null) {
+                taskArray.forEach(element => {
+
+                    var listItem = document.createElement("li")
+                    listItem.innerText = element
+                    var list = document.getElementById("todoList")
+                    list.appendChild(listItem)
+                });
+            }
+        }
+
+
+
+        function addToList() {
+            var task = document.getElementById("todoText").value;
+
+            if (task == "") {
+                document.getElementById("error").innerText = "Task is empty"
+            } else {
+                var listItem = document.createElement("li")
+                listItem.innerText = task
+
+                var list = document.getElementById("todoList")
+                list.appendChild(listItem)
+                document.getElementById("todoText").value = ""
+                save(task)
+            }
+
+
+
+        }
+
+        function save(task) {
+
+            var taskLisArray = null;
+
+            if (localStorage.getItem("taskList") != null) {
+                taskLisArray = JSON.parse(localStorage.getItem("taskList"))
+            } else {
+                taskLisArray = new Array();
+
+            }
+            taskLisArray.push(task)
+            localStorage.setItem("taskList", JSON.stringify(taskLisArray))
+
+
+
+
+        }
+
+        function removeTasks() {
+
+            localStorage.removeItem("taskList")
+
+            var list = document.getElementById("todoList")
+
+
+            while (list.hasChildNodes()) {
+                list.removeChild(list.childNodes[0])
+            }
+
+            loadTaskList()
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+To add a new element to the DOM, you first
+need to create the element and then add it as
+a child of an element.
+
+ Use document.createElement to create a new
+element. Pass the tag name (e.g., “li”) into the
+function call to indicate what element to create.
+
+ To add an element as a child of a parent
+element in the DOM, get a reference to the
+parent, and call appendChild on the parent,
+passing in the child element you’re adding.
+
+ If you add multiple children to a parent
+by using appendChild, each new child is
+appended after the other children, so they
+appear after or below the other children in the
+page (assuming you’re not changing the layout
+with CSS).
+
+ You can use the Web Storage API
+(localStorage) to store data in a user’s
+browser.
+
+ We used localStorage to save playlist songs,
+using Ready Bake Code. You’ll learn more
+about localStorage in Chapter 9.
+
+ You’ll learn more about the DOM and
+JavaScript features like functions and objects
+in the next chapter.
+
+
+Local and Gloabal:
+
+If a variable is declared outside a function, it’s GLOBAL. If it’s declared inside a function, it’s LOCAL.
+
+        Globals live as long as the page. A global
+    variable begins life when its JavaScript is loaded
+    into the page. But, your global variable’s life ends
+    when the page goes away. Even if you reload the
+    same page, all your global variables are destroyed
+    and then recreated in the newly loaded page.
+
+    Local variables typically disappear
+    when your function ends. Local variables
+    are created when your function is first called and
+    live until the function returns (with a value or
+    not). That said, you can take the values of your
+    local variables and return them from the function
+    before the variables meet their digital maker.
+
+
+    You “shadow” your global.
+
+        What happens when I
+        name a local variable the
+        same thing as an existing
+        global variable?
+        
+        Here’s what that means: say you have a global variable
+        beanCounter and you then declare a function, like this:
+        When you do this, any references to beanCounter within
+        the function refer to the local variable and not the global.
+        So we say the global variable is in the shadow of the local
+        variable (in other words we can’t see it because the local
+        version is in our way).
+
+        
+
+        var beanCounter = 10;
+        function getNumberOfItems(ordertype) {
+            var beanCounter = 0;
+            if (ordertype == "order") {
+            // do some stuff with beanCounter...
+            }
+            return beanCounter;
+        }
+        Note that the local and global
+        variables have no effect on each
+        other: if you change one, it has
+        no effect on the other. They

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>COVID</title>
+</head>
+
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log('nanda')
+            $.getJSON("https://finnhub.io/api/v1/covid19/us?token=bps0vsvrh5re0jhjiep0", function (json) {
+                for (const key in json) {
+                    if (json.hasOwnProperty(key)) {
+                        const element = json[key];
+                        console.log(element)
+
+                    }
+                }
+            })
+        });
+    </script>
+
+
+
+
+
+
+
+</body>
+
+
+</html>

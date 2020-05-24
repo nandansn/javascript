@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Dinner</title>
+
+</head>
+
+<body id="">
+
+
+    <script>
+        window.onload = init
+
+        function init(params) {
+            let name = prompt("What is your name?")
+            let dinner = prompt("What you want for dinner?")
+            if (dinner == "dosa" || dinner == "Dosa" || dinner == "salad") {
+                confirm(`Can you confirm ${dinner}`)
+                var image = document.createElement("img")
+                image.setAttribute("src", "salad.jpg")
+                document.body.appendChild(image)
+            } else {
+                alert("No junk allowed cutee")
+            }
+        }
+    </script>
+</body>
+
+
+</html>

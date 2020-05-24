@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Vote</title>
+</head>
+
+<body>
+    <form id="vote">
+        <input name="username" id="uname" type="text">
+        <input type="radio" id="nanda" value="Nanda" name="nanda">Nanda
+        <input type="radio" id="banda"> Banda
+        <input type="radio" id="manda"> Manda
+        <input type="submit" value="submit">
+    </form>
+</body>
+
+
+<script>
+    window.onload = function () {
+        formSubmit()
+    }
+
+    function formSubmit() {
+        var array = document.getElementById("vote").getElementsByTagName("input");
+
+        for (let index = 0; index < array.length; index++) {
+            const element = array[index];
+            element.onclick = function () {
+                if (element.checked) {
+                    console.log(element.value)
+                    document.getElementById("uname").value = element.value
+                }
+            }
+
+
+
+
+        }
+
+
+
+
+    }
+</script>
+
+
+</html>

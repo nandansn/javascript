@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>String</title>
+</head>
+
+<body>
+    <input type="text" id="name" width="30">
+    <button id="nameSubmit">Click me</button>
+
+    <script>
+        window.onload = init
+
+        function init() {
+
+            document.getElementById("nameSubmit").onclick = function () {
+                var name = document.getElementById("name").value
+                alert(`Hello, ${name}`)
+            }
+        }
+    </script>
+
+</body>
+
+</html>

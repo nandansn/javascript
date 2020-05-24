@@ -52,3 +52,77 @@ How to make a request from JavaScript
 
     But hang on, we’re just about to the point of writing
     some real code that uses request.responseText.
+
+
+
+What Browser Security Policy
+
+        Okay, it’s embarassing to hit this kind of snag—just think of the position
+    we’re putting you readers in—but Judy’s right, the browser does enforce
+    some security around your XMLHttpRequest HTTP requests and that can
+    cause some issues.
+    So what is this policy? Well, it’s a browser policy, and it says you can’t
+    retrieve data from a domain that is different from the domain the page itself
+    was served from. Say you’re running the site for DaddyWarBucksBank.com
+    and someone has hacked into your systems and inserted a bit of JavaScript
+    that takes the user’s personal information and does all kinds of interesting
+    things with it by communicating with the server HackersNeedMoreMoney.
+    com. Sounds bad right? Well, to stop that sort of thing, browsers prevent
+    you from making XMLHttpRequests to domains other than the original
+    domain the page was served from.
+
+
+Unacceptable Behavior for JavaScript code:
+    Just like before, the browser makes a request for a page on GoodDomain.com. This may
+include JavaScript and CSS files that are also hosted at GoodDomain.com.
+
+    But now we have code that wants data from another source, that is, BadDomain.com.
+Let’ s see what happens when the page requests that data using XMLHttpRequest
+
+
+So, what are our options?
+    We gotta be honest with you, we knew all along that the XMLHttpRequest cross-origin
+    request would fail. But, as we just said, when you’re building apps you’ve often got access to
+    the server and so this isn’t an issue (and if you’re building apps largely dependent on your own
+    data, using XMLHttpRequest is usually the best way to do it).
+    But at this point we can hear you saying “that’s great, but how can we get this code working
+    already?” Well, we’ve got a couple ways to make that happen:
+1 Plan 1: Use our hosted files.
+    We’ve already put files on our server for you and placed the files at:
+    Go ahead and give it a try by pointing your browser to this URL and you’ll be
+    able to see the same code you typed in so far in action and working.
+2 Plan 2: Use another way to get the data.
+    So, XMLHttpRequest is a great way to get data into your apps when that data is
+    hosted at the same domain as your app, but what if you need to really get data from a
+    third party? Say you need data from Google or Twitter for instance? In those cases we
+    really do have to break through this problem and find another approach.
+    As it turns out there is another way, based on JSON, known as JSONP (if you’re
+    curious it stands for “JSON with Padding”; we agree that sounds weird, but we’ll walk
+    through it in just a sec). Get your jetpack on because the way it works is a little “from
+    another planet” if you know what we mean.
+
+Meet JSONP
+    You’ve probably figured out that JSONP is a way to retrieve JSON objects
+    by using the <script> tag. It’s also a way of retrieving data (again, in the
+    form of JSON objects) that avoids the same-origin security issues we saw
+    with XMLHttpRequest.
+    Let’s step through how JSONP works over the next few pages:
+
+    In our HTML we include a <script> element. The source for this script is actually the URL of a web service that is going to supply us with JSON for our data, 
+    like our Mighty Gumball sales data.
+
+    When the browser encounters the <script> element in the page, it then sends an HTTP request to the src URL.
+
+    The server treats the request like any HTTP request, and sends back JSON in its response.
+
+    The JSON response is in the form of a string, which is parsed and interpreted by the browser. Any data types are turned into real JavaScript object and values, and any code will be executed.
+
+
+Web services let you specify a callback function.
+    In general, web services allow you to specify what you want the function to be named. Although we didn’t tell you, Mighty Gumball
+    is already supporting a way to do this. Here’s how it works: when you  specify your URL, add a parameter on the end, like this:
+
+    http://gumball.wickedlysmart.com/?callback=updateSales
+
+
+

@@ -2,6 +2,8 @@
   "name": "build",
   "version": "1.0.0",
   "scripts": {
-    "start": "node for.js"
+    "start": "node ./recursion/prob-2.js"
+
   }
+
 }

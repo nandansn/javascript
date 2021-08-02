@@ -7,3 +7,5 @@ Object.assign([], name).forEach(c => display(c));
 
 console.log('=================');
 [...name].forEach(i => display(i));
+
+name.split('').forEach(c => display(c));
